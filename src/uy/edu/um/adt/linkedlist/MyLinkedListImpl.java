@@ -226,4 +226,8 @@ public class MyLinkedListImpl<T> implements MyList<T>{
         }
         return myList;
     }
+    @Override
+    public Node<T> getlast(){
+        return this.last;
+    }
 }

@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import uy.edu.um.adt.binarytree.MySearchBinaryTree;
 import uy.edu.um.adt.binarytree.MySearchBinaryTreeImpl;
+import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
+import uy.edu.um.entities.spotifyTrack;
 
 public class SearchBinaryTreeImplTest {
 

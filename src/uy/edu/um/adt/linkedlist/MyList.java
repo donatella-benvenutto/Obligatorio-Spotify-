@@ -19,4 +19,6 @@ public interface MyList<T> {
     String parseMylisttoString();
 
     MyList<T> parseFromJavaList(List<T> list);
+
+    Node<T> getlast();
 }

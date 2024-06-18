@@ -16,15 +16,23 @@ public class topCountryDay {
         }
 
         MyList<spotifyTrack> sortedTracks = sortTracksByRank(filteredTracks);
+        try {
+            if(sortedTracks.size() < 10) {
+                throw new IndexOutOfBoundsException();
+            }
 
-        MyList<String> topSongs = new MyLinkedListImpl<>();
-        for (int i = 0; i < 10; i++) {
-            spotifyTrack track = sortedTracks.get(10-i);
-            topSongs.add("Rank: " + track.getDailyRank() + ", Song: " + track.getName() + ", Artist(s): "+ track.getArtistList().parseMylisttoString());
+            MyList<String> topSongs = new MyLinkedListImpl<>();
+            for (int i = 0; i < 10; i++) {
+                spotifyTrack track = sortedTracks.get(9 - i);
+                topSongs.add("Rank: " + track.getDailyRank() + ", Song: " + track.getName() + ", Artist(s): " + track.getArtistList().parseMylisttoString());
+            }
+            return topSongs;
+        }catch (IndexOutOfBoundsException e) {
+            return null;
         }
-        return topSongs;
     }
-   //bubblesort
+
+    //bubblesort
     private static MyList<spotifyTrack> sortTracksByRank(MyList<spotifyTrack> tracks) {
         int n = tracks.size();
         for (int i = 0; i < n - 1; i++) {
