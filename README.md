@@ -1,2 +1,2 @@
-# Obligatorio-Spotify-2024
+# Obligatorio-Spotify-
 Trabajo de Donatella Benvenutto y Francisco de la Torre
