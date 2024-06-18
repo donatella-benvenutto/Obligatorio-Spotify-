@@ -7,7 +7,9 @@ import uy.edu.um.CsvReader.QuotedBooleanConverter;
 import uy.edu.um.CsvReader.QuotedDoubleConverter;
 import uy.edu.um.CsvReader.QuotedIntegerConverter;
 import uy.edu.um.CsvReader.QuotedStringConverter;
+import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
+import uy.edu.um.entities.Artists;
 
 public class spotifyTrack {
     @CsvBindByName(column = "spotify_id")
@@ -86,9 +88,9 @@ public class spotifyTrack {
     private Integer timeSignature;
 
     // Additional field to store the split artists
-    private MyList<String> artistList;
+    private MyList<Artists> artistList;
 
-    public spotifyTrack(String spotifyId, String name, String artists, int dailyRank, int dailyMovement, int weeklyMovement, String country, String snapshotDate, int popularity, boolean isExplicit, int durationMs, String albumName, String albumReleaseDate, double danceability, double energy, int key, double loudness, int mode, double speechiness, double acousticness, double instrumentalness, double liveness, double valence, double tempo, int timeSignature, MyList<String> artistList) {
+    public spotifyTrack(String spotifyId, String name, String artists, int dailyRank, int dailyMovement, int weeklyMovement, String country, String snapshotDate, int popularity, boolean isExplicit, int durationMs, String albumName, String albumReleaseDate, double danceability, double energy, int key, double loudness, int mode, double speechiness, double acousticness, double instrumentalness, double liveness, double valence, double tempo, int timeSignature) {
         this.spotifyId = spotifyId;
         this.name = name;
         this.artists = artists;
@@ -114,6 +116,14 @@ public class spotifyTrack {
         this.valence = valence;
         this.tempo = tempo;
         this.timeSignature = timeSignature;
+        this.artistList = new MyLinkedListImpl<>();
+    }
+
+    public MyList<Artists> getArtistList() {
+        return artistList;
+    }
+
+    public void setArtistList(MyList<Artists> artistList) {
         this.artistList = artistList;
     }
 
@@ -142,6 +152,7 @@ public class spotifyTrack {
 
     public void setArtists(String artists) {
         this.artists = artists;
+        splitArtists(artists); // Llamar al método helper cada vez que se actualice artists
     }
 
     public int getDailyRank() {
@@ -321,13 +332,25 @@ public class spotifyTrack {
         this.timeSignature = timeSignature;
     }
 
-    public MyList<String> getArtistList() {
-        return artistList;
+    private void splitArtists(String artists) {
+        if (artists != null && !artists.isEmpty()) {
+            artistList = new MyLinkedListImpl<>();
+            if (artists.contains("&")){
+                String[] artistArray = artists.split("&");
+                for (String artistName : artistArray) {
+                    artistList.add(new Artists(artistName.trim()));
+                    //System.out.println(artistName.trim().toString());
+                }
+            } else{
+                artistList.add(new Artists(artists));
+                //System.out.println(artists.toString());
+            }
+
+
+        }
     }
 
-    public void setArtistList(MyList<String> artistList) {
-        this.artistList = artistList;
-    }
+
 
     @Override
     public String toString() {

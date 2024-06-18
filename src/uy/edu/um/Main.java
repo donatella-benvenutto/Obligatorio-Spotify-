@@ -19,16 +19,17 @@ import uy.edu.um.CsvReader.bufferReader;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
 import uy.edu.um.entities.spotifyTrack;
+import uy.edu.um.entities.Artists;
 
 import static uy.edu.um.Consultas.topCountryDay.findTopSongs;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        //String csvFile = "CSV/universal_top_spotify_songs.csv";
+        String csvFile = "CSV/universal_top_spotify_songs.csv";
 
         // Preprocess the CSV file
-        //String processedCSVFile = bufferReader.preprocessCSV(csvFile);
-        String processedCSVFile = "CSV/processed_universal_top_spotify_songs.csv";
+        String processedCSVFile = bufferReader.preprocessCSV(csvFile);
+        //String processedCSVFile = "CSV/processed_universal_top_spotify_songs.csv";
         // Now use the processed CSV file
         //DONA
         try {
@@ -40,7 +41,7 @@ public class Main {
             //for(int i=0; i<beans.size(); i++){
               //  System.out.println(beans.get(i));
             //}
-            System.out.println(findTopSongs(beans,"2024-05-13","AR"));
+            //System.out.println(findTopSongs(beans,"2024-05-13","AR"));
         } catch (IOException e) {
         System.err.println("Error reading CSV file: " + e.getMessage());
         e.printStackTrace();
