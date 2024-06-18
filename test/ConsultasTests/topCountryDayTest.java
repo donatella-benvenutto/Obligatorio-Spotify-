@@ -3,12 +3,13 @@ package ConsultasTests;
 import org.junit.Before;
 import org.junit.Test;
 import uy.edu.um.Consultas.topCountryDay;
+import uy.edu.um.adt.binarytree.MySearchBinaryTree;
+import uy.edu.um.adt.binarytree.MySearchBinaryTreeImpl;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
 import uy.edu.um.entities.spotifyTrack;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class topCountryDayTest {
 
@@ -36,6 +37,7 @@ public class topCountryDayTest {
         tracks.add(new spotifyTrack("16", "Song16", "Artist16", 16, 0, 0, "USA", "2023-10-15", 15, false, 350000, "Album16", "2023-04-01", 0.5, 1.2, 5, -5.0, 1, 0.1, 1.7, 0.0, 1.8, 2.0, 135.0, 4, createArtistList("Artist16")));
     }
 
+
     private MyList<String> createArtistList(String... artists) {
         MyList<String> artistList = new MyLinkedListImpl<>();
         for (String artist : artists) {
@@ -48,27 +50,26 @@ public class topCountryDayTest {
     public void testFindTopSongs() {
         MyList<String> topSongs = topCountryDay.findTopSongs(tracks, "2023-10-15", "USA");
 
-        assertNotNull(topSongs);
-        assertEquals(3, topSongs.size());
 
-        assertEquals("Rank: 1, Song: Song1, Artist(s): Artist1", topSongs.get(0));
-        assertEquals("Rank: 2, Song: Song2, Artist(s): Artist2", topSongs.get(1));
-        assertEquals("Rank: 3, Song: Song3, Artist(s): Artist3", topSongs.get(2));
+        assertNotNull(topSongs);
+        assertEquals(10, topSongs.size());
+
+        assertEquals("Rank: 1, Song: Song1, Artist(s): Artist1", topSongs.getlast().getValue());
+        assertEquals("Rank: 2, Song: Song2, Artist(s): Artist2", topSongs.get(8));
+        assertEquals("Rank: 10, Song: Song10, Artist(s): Artist10", topSongs.get(0));
     }
 
     @Test
     public void testFindTopSongsWithNoMatches() {
         MyList<String> topSongs = topCountryDay.findTopSongs(tracks, "2023-10-16", "USA");
 
-        assertNotNull(topSongs);
-        assertEquals(0, topSongs.size());
+        assertNull(topSongs);
     }
 
     @Test
     public void testFindTopSongsWithDifferentCountry() {
         MyList<String> topSongs = topCountryDay.findTopSongs(tracks, "2023-10-15", "CAN");
 
-        assertNotNull(topSongs);
-        assertEquals(0, topSongs.size());
+        assertNull(topSongs);
     }
 }

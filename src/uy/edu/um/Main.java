@@ -1,21 +1,12 @@
 package uy.edu.um;
 
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.CSVReaderBuilder;
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.HeaderColumnNameMappingStrategy;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
-import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.util.*;
 
-import uy.edu.um.CsvReader.QuotedMappingStrategy;
-import uy.edu.um.CsvReader.bufferReader;
+import uy.edu.um.adt.binarytree.MySearchBinaryTree;
+import uy.edu.um.adt.binarytree.MySearchBinaryTreeImpl;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
 import uy.edu.um.entities.spotifyTrack;
@@ -32,19 +23,23 @@ public class Main {
         // Now use the processed CSV file
         //DONA
         try {
-            MyList<spotifyTrack> beans = new MyLinkedListImpl<>();
-            beans = beans.parseFromJavaList(new CsvToBeanBuilder(new FileReader(processedCSVFile))
+            MyList<spotifyTrack> beanslist = new MyLinkedListImpl<>();
+            beanslist = beanslist.parseFromJavaList(new CsvToBeanBuilder(new FileReader(processedCSVFile))
                     .withType(spotifyTrack.class)
                     .build()
                     .parse());
-            //for(int i=0; i<beans.size(); i++){
-              //  System.out.println(beans.get(i));
-            //}
-            System.out.println(findTopSongs(beans,"2024-05-13","AR"));
+            MyList<String> beanslistkey = new MyLinkedListImpl<>();
+            for(int i=0; i<beanslist.size(); i++){
+                beanslistkey.add(beanslist.get(i).getSpotifyId());
+            }
+            MySearchBinaryTree<String, spotifyTrack> beanstree = new MySearchBinaryTreeImpl<>();
+            beanstree.parseLinkedListToTree(beanslistkey, beanslist);
+            System.out.println(findTopSongs(beanslist,"2024-05-13","AR"));
         } catch (IOException e) {
         System.err.println("Error reading CSV file: " + e.getMessage());
         e.printStackTrace();
         }
+
 
         //FRAN
         /*try (Reader reader = new FileReader(processedCSVFile)) {
