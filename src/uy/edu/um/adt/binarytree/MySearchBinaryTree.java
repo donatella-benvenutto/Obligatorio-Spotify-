@@ -20,4 +20,8 @@ public interface MySearchBinaryTree<K extends Comparable<K>, V> {
 	MySearchBinaryTree<K, V> parseLinkedListToTree(MyList<K> linkedList2,MyList<V> linkedList);
 
 	K getsmallestkey();
+
+	TreeNode<K, V> getleft(K key);
+
+	TreeNode<K, V> getleftofnode();
 }

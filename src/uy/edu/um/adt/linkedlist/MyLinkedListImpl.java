@@ -5,6 +5,7 @@ import uy.edu.um.adt.queue.MyQueue;
 import uy.edu.um.adt.stack.EmptyStackException;
 import uy.edu.um.adt.stack.MyStack;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class MyLinkedListImpl<T> implements MyList<T>{
@@ -229,5 +230,41 @@ public class MyLinkedListImpl<T> implements MyList<T>{
     @Override
     public Node<T> getlast(){
         return this.last;
+    }
+
+    public void addInOrder(T track, Object o) {
+        Node<T> temp = this.first;
+        Node<T> elementToAdd = new Node<>(track);
+        if (temp == null) {
+            this.first = elementToAdd;
+            this.last = elementToAdd;
+        } else {
+            while (temp != null) {
+                if (o instanceof Comparator) {
+                    if (((Comparator<T>) o).compare(track, temp.getValue()) > 0) {
+                        if (temp == this.first) {
+                            elementToAdd.setNext(this.first);
+                            this.first = elementToAdd;
+                            break;
+                        } else {
+                            Node<T> temp2 = this.first;
+                            while (temp2.getNext() != temp) {
+                                temp2 = temp2.getNext();
+                            }
+                            temp2.setNext(elementToAdd);
+                            elementToAdd.setNext(temp);
+                            break;
+                        }
+                    } else if (temp == this.last) {
+                        this.last.setNext(elementToAdd);
+                        this.last = elementToAdd;
+                        break;
+                    }
+                } else {
+                    throw new IllegalArgumentException("El segundo parametro debe ser un Comparator");
+                }
+                temp = temp.getNext();
+            }
+        }
     }
 }

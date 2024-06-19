@@ -124,4 +124,21 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements
         }
         return this.root.getKey();
     }
+    public TreeNode<K, V> getleft(K  key){
+        TreeNode<K, V> current = this.root;
+        while(current != null){
+            int nValue = key.compareTo(current.getKey());
+            if(nValue == 0){
+                return current.getLeft();
+            }else if(nValue > 0){
+                current = current.getRight();
+            }else{
+                current = current.getLeft();
+            }
+        }
+        return null;
+    }
+    public TreeNode<K, V> getleftofnode(TreeNode<K, V> node){
+        return node.getLeft();
+    }
 }

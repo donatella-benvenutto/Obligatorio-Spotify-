@@ -1,6 +1,7 @@
 package uy.edu.um.Consultas;
 
 import uy.edu.um.adt.binarytree.MySearchBinaryTree;
+import uy.edu.um.adt.binarytree.TreeNode;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.entities.spotifyTrack;
 import uy.edu.um.adt.linkedlist.MyList;
@@ -8,35 +9,42 @@ import uy.edu.um.adt.linkedlist.MyList;
 import static uy.edu.um.entities.spotifyTrack.datetoint;
 
 public class topCountryDay {
-    public static MyList<String> findTopSongs(MySearchBinaryTree<Integer,spotifyTrack> tracks, String date, String country) {
+    public static MyList<String> findTopSongs(MySearchBinaryTree<Integer, spotifyTrack> tracks, String date, String country) {
         MyList<spotifyTrack> filteredTracks = new MyLinkedListImpl<>();
         System.out.println("Starting");
         int j = 0;
-        MySearchBinaryTree<Integer,spotifyTrack> privatetracks=tracks;
-        while(tracks.contains(datetoint(date))) {
-            spotifyTrack track = privatetracks.find(datetoint(date));
+        int i = 0;
+        MySearchBinaryTree<Integer, spotifyTrack> privatetracks = tracks;
+        spotifyTrack track = privatetracks.find(datetoint(date));
+        TreeNode<Integer, spotifyTrack> node = privatetracks.getleft(datetoint(date));
+        while (privatetracks.getleft(datetoint(date)).getKey() == datetoint(date)) {
             if (track.getCountry().equalsIgnoreCase(country)) {
                 filteredTracks.add(track);
-                System.out.println("In for loop: "+j);
+                System.out.println("In for loop: " + j);
             }
-            privatetracks.remove(datetoint(date));
-            System.out.println("Ran for loop: "+j);
+            for (i=0; i < i; i++) {
+                node=privatetracks.getleftofnode();
+            }
+            track = privatetracks.getleft(datetoint(date)).getValue();
+            i++;
+            System.out.println("Ran for loop: " + j);
             j++;
+
         }
         System.out.println("Bubblesort");
 
         MyList<spotifyTrack> sortedTracks = sortTracksByRank(filteredTracks);
         try {
-            if(sortedTracks.size() < 10) {
+            if (sortedTracks.size() < 10) {
                 throw new IndexOutOfBoundsException();
             }
             MyList<String> topSongs = new MyLinkedListImpl<>();
-            for (int i = 0; i < 10; i++) {
-                spotifyTrack track = sortedTracks.get(9 - i);
+            for (i = 0; i < 10; i++) {
+                track = sortedTracks.get(9 - i);
                 topSongs.add("Rank: " + track.getDailyRank() + ", Song: " + track.getName() + ", Artist(s): " + track.getArtistList().parseMylisttoString());
             }
             return topSongs;
-        }catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }

@@ -11,7 +11,7 @@ import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
 import uy.edu.um.entities.Artists;
 
-public class spotifyTrack {
+public class spotifyTrack implements Comparable<spotifyTrack> {
     @CsvBindByName(column = "spotify_id")
     private String spotifyId;
 
@@ -387,5 +387,11 @@ public class spotifyTrack {
                 ", tempo=" + tempo +
                 ", timeSignature=" + timeSignature +
                 '}';
+    }
+
+    @Override
+    public int compareTo(spotifyTrack o) {
+
+        return 0;
     }
 }

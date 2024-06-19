@@ -2,6 +2,8 @@ package uy.edu.um.adt.hash;
 
 
 import org.apache.commons.math3.primes.Primes;
+import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
+import uy.edu.um.adt.linkedlist.Node;
 
 public class MyHashImpl<K extends Comparable<K>, V> implements
         MyHash<K, V> {
@@ -20,9 +22,20 @@ public class MyHashImpl<K extends Comparable<K>, V> implements
             this.key = key;
             this.value = value;
         }
-        //public K getKey() {return key;}
-        //public V getValue() {return value;}
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+
+        public Entry<K, V> getNext() {
+
+        }
     }
+
     public Entry<K, V>[] getTable() {
         return table;
     }
@@ -140,5 +153,16 @@ public class MyHashImpl<K extends Comparable<K>, V> implements
         table = newTable;
         size = newSizeCounter; // Actualiza el tamaño real de la tabla
         capacity = newSize;
+    }
+
+    public MyLinkedListImpl<K> keySet() {
+        MyLinkedListImpl<K> keys = new MyLinkedListImpl<>();
+        for (Entry<K, V> entry : table) {
+            while (entry != null) {
+                keys.add(entry.key);
+                entry = entry.next;
+            }
+        }
+        return keys;
     }
 }
