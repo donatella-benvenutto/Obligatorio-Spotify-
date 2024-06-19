@@ -85,6 +85,8 @@ public class bufferReader {
                             }
                             columns[0] = columns[0].replace("\"\"", "\"");
                             columns[0] = columns[0].substring(0, columns[0].length() - 1);
+                        }if(columns[0].endsWith("\"")){
+                            columns[0] = columns[0].substring(0, columns[0].length() - 1).concat("&");
                         }
                     } else if (i == columns.length - 1) {
                         columns[i] = columns[i].replace("\"", "");
