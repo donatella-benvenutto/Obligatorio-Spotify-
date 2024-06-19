@@ -1,26 +1,35 @@
 package uy.edu.um.Consultas;
 
+import uy.edu.um.adt.binarytree.MySearchBinaryTree;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.entities.spotifyTrack;
 import uy.edu.um.adt.linkedlist.MyList;
 
-public class topCountryDay {
-    public static MyList<String> findTopSongs(MyList<spotifyTrack> tracks, String date, String country) {
-        MyList<spotifyTrack> filteredTracks = new MyLinkedListImpl<>();
+import static uy.edu.um.entities.spotifyTrack.datetoint;
 
-        for (int i = 0; i < tracks.size(); i++) {
-            spotifyTrack track = tracks.get(i);
-            if (track.getSnapshotDate().equals(date) && track.getCountry().equalsIgnoreCase(country)) {
+public class topCountryDay {
+    public static MyList<String> findTopSongs(MySearchBinaryTree<Integer,spotifyTrack> tracks, String date, String country) {
+        MyList<spotifyTrack> filteredTracks = new MyLinkedListImpl<>();
+        System.out.println("Starting");
+        int j = 0;
+        MySearchBinaryTree<Integer,spotifyTrack> privatetracks=tracks;
+        while(tracks.contains(datetoint(date))) {
+            spotifyTrack track = privatetracks.find(datetoint(date));
+            if (track.getCountry().equalsIgnoreCase(country)) {
                 filteredTracks.add(track);
+                System.out.println("In for loop: "+j);
             }
+            privatetracks.remove(datetoint(date));
+            System.out.println("Ran for loop: "+j);
+            j++;
         }
+        System.out.println("Bubblesort");
 
         MyList<spotifyTrack> sortedTracks = sortTracksByRank(filteredTracks);
         try {
             if(sortedTracks.size() < 10) {
                 throw new IndexOutOfBoundsException();
             }
-
             MyList<String> topSongs = new MyLinkedListImpl<>();
             for (int i = 0; i < 10; i++) {
                 spotifyTrack track = sortedTracks.get(9 - i);

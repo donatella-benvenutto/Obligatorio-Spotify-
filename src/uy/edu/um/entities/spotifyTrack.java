@@ -328,7 +328,6 @@ public class spotifyTrack {
     }
 
     public void setTimeSignature(int timeSignature) {
-        System.out.println("Setting time signature: " + timeSignature);
         this.timeSignature = timeSignature;
     }
 
@@ -349,7 +348,13 @@ public class spotifyTrack {
 
         }
     }
-
+    public static int datetoint(String value) {
+        String[] parts = value.split("-");
+        String year = parts[0];
+        String month = parts[1];
+        String day = parts[2];
+        return Integer.parseInt(year.concat(month).concat(day));
+    }
 
 
     @Override

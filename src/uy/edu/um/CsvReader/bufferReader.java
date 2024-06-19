@@ -51,13 +51,13 @@ public class bufferReader {
                 newLine = new StringBuilder();
                 if (!columns[1].startsWith("\"")) {
                     columns[0] = columns[0].concat(columns[1]);
-                    for (int i = 1; i < columns.length-1; i++){
-                        columns[i] = columns[i+1];
+                    for (int i = 1; i < columns.length - 1; i++) {
+                        columns[i] = columns[i + 1];
                     }
-                    columns[columns.length]=null;
+                    columns[columns.length] = null;
                 }
                 for (int i = 0; i < columns.length; i++) {
-                    if(columns[i].contentEquals("\"\"")){
+                    if (columns[i].contentEquals("\"\"")) {
                         columns[i] = columns[i].replace("\"\"", "null");
                     }
                     if (i > 0 && i < columns.length - 1) {
@@ -65,21 +65,26 @@ public class bufferReader {
                         columns[i] = columns[i].replace(";", "&&");
                         columns[i] = columns[i].replace("\"", "");
                     } else if (i == 0) {
-                        columns[0] = columns[0].replace(",\"", "\",");
-                        columns[0] = columns[0].replace(";", "&&");
-                        if(columns[0].contains("\"\"\"\"")){
-                            columns[0] = columns[0].replace("\"\"\"\"", "\"null\"");
-                        }
-                        columns[0] = columns[0].replace("\"\"", "\"");
-                        columns[0] = columns[0].substring(0, columns[0].length() - 1);
-                        while(columns[0].replace(",\"","").contains(",")) {
+                        if (columns[0].contains(",\"\"\"")) {
                             columns[0] = columns[0]
                                     .substring(0, columns[0].lastIndexOf(","))
                                     .concat("&")
-                                    .concat(columns[0].substring(columns[0].lastIndexOf(",") + 1, columns[0].length()));
-                            if(columns[0].contains("\"&")){
+                                    .concat(columns[0].substring(columns[0].lastIndexOf(",") + 2, columns[0].length()));
+                            columns[0] = columns[0].replace(",\"", "\",");
+                            if (columns[0].contains("\"&")) {
                                 columns[0] = columns[0].replace("&", ",\"null");
                             }
+                            if (columns[0].contains("\"\"\"\"")) {
+                                columns[0] = columns[0].replace("\"\"\"\"", "\"null\"");
+                            }
+                        } else {
+                            columns[0] = columns[0].replace(",\"", "\",");
+                            columns[0] = columns[0].replace(";", "&&");
+                            if (columns[0].contains("\"\"\"\"")) {
+                                columns[0] = columns[0].replace("\"\"\"\"", "\"\"");
+                            }
+                            columns[0] = columns[0].replace("\"\"", "\"");
+                            columns[0] = columns[0].substring(0, columns[0].length() - 1);
                         }
                     } else if (i == columns.length - 1) {
                         columns[i] = columns[i].replace("\"", "");

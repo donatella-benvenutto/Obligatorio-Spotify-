@@ -116,4 +116,12 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements
         }
         return searchBinaryTree;
     }
+    public K getsmallestkey(){
+        for(TreeNode<K, V> current = this.root; current != null; current = current.getLeft()){
+            if(current.getLeft() == null){
+                return current.getKey();
+            }
+        }
+        return this.root.getKey();
+    }
 }
