@@ -5,6 +5,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileReader;
 import java.io.IOException;
 
+import uy.edu.um.CsvReader.bufferReader;
 import uy.edu.um.adt.binarytree.MySearchBinaryTree;
 import uy.edu.um.adt.binarytree.MySearchBinaryTreeImpl;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;

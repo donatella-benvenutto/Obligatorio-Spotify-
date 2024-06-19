@@ -345,8 +345,7 @@ public class spotifyTrack {
                 artistList.add(new Artists(artists));
                 //System.out.println(artists.toString());
             }
-
-
+            setArtistList(artistList);
         }
     }
 
