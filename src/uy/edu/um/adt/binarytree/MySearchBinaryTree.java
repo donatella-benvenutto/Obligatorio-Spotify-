@@ -22,6 +22,9 @@ public interface MySearchBinaryTree<K extends Comparable<K>, V> {
 	K getsmallestkey();
 
 	TreeNode<K, V> getleft(K key);
+	//K getKeyofNode(TreeNode<K, V> node);
 
-	TreeNode<K, V> getleftofnode();
+	TreeNode<K, V> getleftofnode(TreeNode<K, V> node);
+	TreeNode<K, V> findNode(K key);
+	MyList<TreeNode<K, V>> findNodesByDate(K dateKey);
 }

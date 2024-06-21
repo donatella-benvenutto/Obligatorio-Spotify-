@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class countArtistInTop50ByDate {
 
-    public int countArtistAppearances(Date date, Artists artist, MySearchBinaryTreeImpl<Date, MyLinkedListImpl<spotifyTrack>> tree) {
+   /* public int countArtistAppearances(Date date, Artists artist, MySearchBinaryTreeImpl<Date, MyLinkedListImpl<spotifyTrack>> tree) {
         MyLinkedListImpl<spotifyTrack> tracks = tree.find(date);
         int count = 0;
 
@@ -21,5 +21,5 @@ public class countArtistInTop50ByDate {
         }
 
         return count;
-    }
+    }*/
 }

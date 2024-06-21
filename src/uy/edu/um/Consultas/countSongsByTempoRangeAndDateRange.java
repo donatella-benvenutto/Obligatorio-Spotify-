@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class countSongsByTempoRangeAndDateRange {
 
-    public int countSongsByTempo(Date startDate, Date endDate, double minTempo, double maxTempo, MySearchBinaryTreeImpl<Date, MyLinkedListImpl<spotifyTrack>> tree) {
+    /*public int countSongsByTempo(Date startDate, Date endDate, double minTempo, double maxTempo, MySearchBinaryTreeImpl<Date, MyLinkedListImpl<spotifyTrack>> tree) {
         int count = 0;
 
         for (Date date = startDate; !date.after(endDate); date = incrementDateByOne(date)) {
@@ -30,6 +30,6 @@ public class countSongsByTempoRangeAndDateRange {
         c.setTime(date);
         c.add(Calendar.DATE, 1);
         return c.getTime();
-    }
+    }*/
 }
 

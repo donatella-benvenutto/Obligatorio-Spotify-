@@ -31,12 +31,28 @@ public class Main {
 
 
         // Now use the processed CSV file
-        //DONA        try {
+        //DONA
+        try {
             MyList<spotifyTrack> beanslist = new MyLinkedListImpl<>();
             beanslist = beanslist.parseFromJavaList(new CsvToBeanBuilder(new FileReader(processedCSVFile))
                     .withType(spotifyTrack.class)
                     .build()
                     .parse());
+
+            //Pasar string de snapshot_date a int ej: "2023-10-06" = 20231006 y hae una lista en el orden de beanslist
+            MyList<Integer> beanslistkey = new MyLinkedListImpl<>();
+            for (int i = 0; i < beanslist.size(); i++) {
+                beanslistkey.add(datetoint(beanslist.get(i).getSnapshotDate()));
+            }
+
+            //Usar beanslistkey
+            MySearchBinaryTree<Integer, spotifyTrack> beanstree = new MySearchBinaryTreeImpl<>();
+            beanstree.parseLinkedListToTree(beanslistkey, beanslist);
+
+            System.out.println(findTopSongs(beanstree, "2023-10-06", "NG"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
         /*// Create a list to hold the SpotifyTrack objects
         MyList<spotifyTrack> beanslist = new MyLinkedListImpl<>();
 
@@ -58,15 +74,6 @@ public class Main {
         }*/
 
 
-            MyList<Integer> beanslistkey = new MyLinkedListImpl<>();
-            for (int i = 0; i < beanslist.size(); i++) {
-                beanslistkey.add(datetoint(beanslist.get(i).getSnapshotDate()));
-            }
-
-        MySearchBinaryTree<Integer, spotifyTrack> beanstree = new MySearchBinaryTreeImpl<>();
-        beanstree.parseLinkedListToTree(beanslistkey, beanslist);
-
-        System.out.println(findTopSongs(beanstree, "2023-10-06", "NG"));
-
+        }
     }
 }

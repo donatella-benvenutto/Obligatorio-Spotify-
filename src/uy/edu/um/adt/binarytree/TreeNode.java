@@ -16,6 +16,8 @@ public class TreeNode<K extends Comparable<K>, V> {
 	public TreeNode(K key, V value) {
 		this.key = key;
 		this.value = value;
+		this.left = null;
+		this.right = null;
 	}
 
 	public void add(K key, V value) {		

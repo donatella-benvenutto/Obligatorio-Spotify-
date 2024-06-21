@@ -124,6 +124,7 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements
         }
         return this.root.getKey();
     }
+    @Override
     public TreeNode<K, V> getleft(K  key){
         TreeNode<K, V> current = this.root;
         while(current != null){
@@ -138,7 +139,55 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements
         }
         return null;
     }
+    @Override
+    public TreeNode<K, V> findNode(K key) {
+        return findNodeRecursively(root, key);
+    }
+    private TreeNode<K, V> findNodeRecursively(TreeNode<K, V> current, K key) {
+        if (current == null) {
+            return null;
+        }
+        int cmp = key.compareTo(current.getKey());
+        if (cmp == 0) {
+            return current;
+        } else if (cmp < 0) {
+            return findNodeRecursively(current.getLeft(), key);
+        } else {
+            return findNodeRecursively(current.getRight(), key);
+        }
+    }
+    /*@Override
+    public K getKeyofNode(TreeNode<K, V> node){
+        return node.getKey();
+    }*/
+
     public TreeNode<K, V> getleftofnode(TreeNode<K, V> node){
         return node.getLeft();
+    }
+    @Override
+    public MyList<TreeNode<K, V>> findNodesByDate(K dateKey) {
+        MyList<TreeNode<K, V>> result = new MyLinkedListImpl<>();
+        findNodesByDate(root, dateKey, result);
+        return result;
+    }
+
+    private void findNodesByDate(TreeNode<K, V> node, K dateKey, MyList<TreeNode<K, V>> result) {
+        if (node == null) {
+            return;
+        }
+
+        if (dateKey.compareTo(node.getKey()) < 0) {
+            findNodesByDate(node.getLeft(), dateKey, result);
+        }
+
+        if (dateKey.compareTo(node.getKey()) == 0) {
+            result.add(node);
+            findNodesByDate(node.getLeft(), dateKey, result);
+            findNodesByDate(node.getRight(), dateKey, result);
+        }
+
+        if (dateKey.compareTo(node.getKey()) > 0) {
+            findNodesByDate(node.getRight(), dateKey, result);
+        }
     }
 }

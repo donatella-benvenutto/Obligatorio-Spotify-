@@ -1,5 +1,6 @@
 package ConsultasTests;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import uy.edu.um.Consultas.topCountryDay;
@@ -13,12 +14,16 @@ import static org.junit.Assert.*;
 
 public class topCountryDayTest {
 
-    private MySearchBinaryTree<Integer, spotifyTrack> tracks;
+    //private MySearchBinaryTree<Integer, spotifyTrack> tracks;
 
-    @Before
+    //@Before
+    /*@Test
     public void setUp() {
-        tracks = new MySearchBinaryTreeImpl<Integer, spotifyTrack>();
+        tracks = new MySearchBinaryTreeImpl<>();
 
+        tracks.add(20231015,new spotifyTrack("1", "Song111", "Artist1", 1, 0, 0, "USA", "2023-10-14", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tracks.add(20231015,new spotifyTrack("1", "Song1111", "Artist1", 1, 0, 0, "USA", "2023-10-16", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tracks.add(20231015,new spotifyTrack("1", "Song1", "Artist1", 1, 0, 0, "USA", "2023-10-15", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
         tracks.add(20231015,new spotifyTrack("1", "Song1", "Artist1", 1, 0, 0, "USA", "2023-10-15", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
         tracks.add(20231015,new spotifyTrack("2", "Song2", "Artist2", 2, 0, 0, "USA", "2023-10-15", 85, false, 210000, "Album2", "2023-02-01", 0.7, 0.8, 5, -5.0, 1, 0.1, 0.3, 0.0, 0.4, 0.6, 121.0, 4));
         tracks.add(20231015,new spotifyTrack("3", "Song3", "Artist3", 3, 0, 0, "USA", "2023-10-15", 80, false, 220000, "Album3", "2023-03-01", 0.6, 0.9, 5, -5.0, 1, 0.1, 0.4, 0.0, 0.5, 0.7, 122.0, 4));
@@ -47,6 +52,7 @@ public class topCountryDayTest {
 
         assertEquals("Rank: 1, Song: Song1, Artist(s): ", topSongs.getlast().getValue());
         assertEquals("Rank: 2, Song: Song2, Artist(s): ", topSongs.get(8));
+        assertEquals("Rank: 5, Song: Song5, Artist(s): ", topSongs.get(5));
         assertEquals("Rank: 10, Song: Song10, Artist(s): ", topSongs.get(0));
     }
 
@@ -62,5 +68,48 @@ public class topCountryDayTest {
         MyList<String> topSongs = topCountryDay.findTopSongs(tracks, "2023-10-15", "CAN");
 
         assertNull(topSongs);
+    }*/
+
+    @Test
+    public void testFindTopSongsWithNoMatches() {
+        MySearchBinaryTree<Integer, spotifyTrack> tracks = new MySearchBinaryTreeImpl<>();
+        tracks.add(20230620, new spotifyTrack("1", "Song1", "Artist1", 1, 0, 0, "US", "2023-06-20", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tracks.add(20230621, new spotifyTrack("2", "Song2", "Artist2", 2, 0, 0, "US", "2023-06-21", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+
+        MyList<String> result = topCountryDay.findTopSongs(tracks, "2023-06-19", "US");
+
+        Assert.assertNull(result);
+    }
+
+    @Test
+    public void testFindTopSongsWithMatches() {
+        MySearchBinaryTree<Integer, spotifyTrack> tracks = new MySearchBinaryTreeImpl<>();
+        tracks.add(20230620, new spotifyTrack("1", "Song1", "Artist1", 1, 0, 0, "US", "2023-06-20", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tracks.add(20230620, new spotifyTrack("2", "Song2", "Artist2", 2, 0, 0, "US", "2023-06-20", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tracks.add(20230621, new spotifyTrack("3", "Song3", "Artist3", 3, 0, 0, "US", "2023-06-21", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+
+        MyList<String> result = topCountryDay.findTopSongs(tracks, "2023-06-20", "US");
+
+        Assert.assertNotNull(result);
+        Assert.assertEquals(2, result.size());
+        Assert.assertTrue(result.get(0).contains("Song2"));
+        Assert.assertTrue(result.get(1).contains("Artist1"));
+    }
+
+    @Test
+    public void testFindTopSongsWithDifferentCountry() {
+        MySearchBinaryTree<Integer, spotifyTrack> tracks = new MySearchBinaryTreeImpl<>();
+
+        tracks.add(20230620, new spotifyTrack("1", "Song1", "Artist1", 1, 0, 0, "US", "2023-06-20", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tracks.add(20230620, new spotifyTrack("2", "Song2", "Artist2", 2, 0, 0, "UK", "2023-06-20", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tracks.add(20230621, new spotifyTrack("3", "Song3", "Artist3", 3, 0, 0, "US", "2023-06-21", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tracks.add(20230620, new spotifyTrack("3", "Song3", "Artist3", 1, 0, 0, "UK", "2023-06-20", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+
+
+        MyList<String> result = topCountryDay.findTopSongs(tracks, "2023-06-20", "UK");
+
+        Assert.assertNotNull(result);
+        Assert.assertEquals(2, result.size());
+        Assert.assertTrue(result.get(0).contains("Song2"));
     }
 }

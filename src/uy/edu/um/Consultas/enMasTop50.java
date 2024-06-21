@@ -1,5 +1,6 @@
 package uy.edu.um.Consultas;
 
+import uy.edu.um.adt.binarytree.MySearchBinaryTree;
 import uy.edu.um.adt.binarytree.MySearchBinaryTreeImpl;
 import uy.edu.um.adt.hash.MyHash;
 import uy.edu.um.adt.hash.MyHashImpl;
@@ -11,10 +12,10 @@ import java.util.*;
 import static java.util.Map.Entry.comparingByValue;
 
 public class enMasTop50 {
-    public MyLinkedListImpl<spotifyTrack> getTop5Songs(Date date, MySearchBinaryTreeImpl<Date, MyLinkedListImpl<spotifyTrack>> tree) {
+    /*public MyList<spotifyTrack> getTop5Songs(Date date, MySearchBinaryTree<Date, MyList<spotifyTrack>> tree) {
 
-        MyLinkedListImpl<spotifyTrack> tracks = tree.find(date);
-        MyHashImpl<spotifyTrack, Integer> frequencyMap = new MyHashImpl<>();
+        MyList<spotifyTrack> tracks = tree.find(date);
+        MyHash<spotifyTrack, Integer> frequencyMap = new MyHashImpl<>();
 
         for (int i = 0; i < tracks.size(); i++) {
             spotifyTrack track = tracks.get(i);
@@ -39,5 +40,5 @@ public class enMasTop50 {
         }
 
         return top5Tracks;
-    }
+    }*/
 }

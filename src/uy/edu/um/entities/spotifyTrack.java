@@ -344,7 +344,7 @@ public class spotifyTrack implements Comparable<spotifyTrack> {
                 artistList.add(new Artists(artists));
                 //System.out.println(artists.toString());
             }
-
+            setArtistList(artistList);
 
         }
     }

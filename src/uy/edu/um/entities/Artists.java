@@ -13,4 +13,10 @@ public class Artists implements Comparable<Artists> {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    @Override
+    public int compareTo(Artists o) {
+        return 0;
+    }
 }

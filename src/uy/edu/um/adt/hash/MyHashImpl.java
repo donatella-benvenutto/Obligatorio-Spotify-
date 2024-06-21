@@ -31,9 +31,9 @@ public class MyHashImpl<K extends Comparable<K>, V> implements
             return value;
         }
 
-        public Entry<K, V> getNext() {
+        /*public Entry<K, V> getNext() {
 
-        }
+        }*/
     }
 
     public Entry<K, V>[] getTable() {
@@ -155,7 +155,7 @@ public class MyHashImpl<K extends Comparable<K>, V> implements
         capacity = newSize;
     }
 
-    public MyLinkedListImpl<K> keySet() {
+    /*public MyLinkedListImpl<K> keySet() {
         MyLinkedListImpl<K> keys = new MyLinkedListImpl<>();
         for (Entry<K, V> entry : table) {
             while (entry != null) {
@@ -164,5 +164,5 @@ public class MyHashImpl<K extends Comparable<K>, V> implements
             }
         }
         return keys;
-    }
+    }*/
 }
