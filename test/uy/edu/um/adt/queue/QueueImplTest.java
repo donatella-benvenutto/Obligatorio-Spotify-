@@ -9,7 +9,7 @@ public class QueueImplTest {
 
     @Test
     public void testFlujoCompleto() {
-        MyQueue<Integer> queue = new MyQueue<Integer>() {
+        MyQueue<Integer> queue = new MyLinkedListImpl<>() {
             @Override
             public void enqueue(Integer value) {
 

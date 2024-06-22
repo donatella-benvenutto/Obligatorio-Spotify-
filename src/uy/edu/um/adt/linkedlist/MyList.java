@@ -19,6 +19,7 @@ public interface MyList<T> {
     String parseMylisttoString();
 
     MyList<T> parseFromJavaList(List<T> list);
+    void set(int position, T value);
 
     Node<T> getlast();
 }

@@ -1,18 +1,14 @@
 package ConsultasTests;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import uy.edu.um.Consultas.topCountryDay;
 import uy.edu.um.adt.binarytree.MySearchBinaryTree;
 import uy.edu.um.adt.binarytree.MySearchBinaryTreeImpl;
-import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
 import uy.edu.um.entities.spotifyTrack;
 
-import static org.junit.Assert.*;
-
-public class topCountryDayTest {
+public class TopCountryDayTest {
 
     //private MySearchBinaryTree<Integer, spotifyTrack> tracks;
 

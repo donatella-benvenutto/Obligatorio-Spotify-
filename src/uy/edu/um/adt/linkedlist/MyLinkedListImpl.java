@@ -8,7 +8,7 @@ import uy.edu.um.adt.stack.MyStack;
 import java.util.Comparator;
 import java.util.List;
 
-public class MyLinkedListImpl<T> implements MyList<T>{
+public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T>{
 
     private Node<T> first;
 
@@ -66,7 +66,6 @@ public class MyLinkedListImpl<T> implements MyList<T>{
         }
     }
 
-
     @Override
     public T get(int position) {
         T valueToReturn = null;
@@ -83,16 +82,28 @@ public class MyLinkedListImpl<T> implements MyList<T>{
 
         // si se encontro la posicion se retorna el valor
         // en caso que se haya llegado al final y no se llego a la posicion se retorna null
-        if (tempPosition == position) {
-
-
-            valueToReturn = temp.getValue();
-
+        if (temp == null){
+            return null;
+        } else {
+            return temp.getValue();
         }
 
-        return valueToReturn;
     }
 
+    // Operaciones particulares a Queue
+
+    public void enqueue(T value) {
+        addToBeginning(value);
+    }
+
+    public T dequeue() throws EmptyQueueException {
+        if (this.last == null) { // si la queue esta vacia
+
+            throw new EmptyQueueException();
+        }
+
+        return removeLast();
+    }
     @Override
     public boolean contains(T value) {
         boolean contains = false;
@@ -211,6 +222,35 @@ public class MyLinkedListImpl<T> implements MyList<T>{
             }
         }
     }
+    // Operaciones particulares a Stack
+
+    public void push(T value) {
+        addToTheEnd(value);
+    }
+
+    public T pop() throws EmptyStackException {
+        if (this.last == null) { // si la pila esta vacia
+
+            throw new EmptyStackException();
+        }
+
+        return removeLast();
+    }
+
+    public T peek() {
+        T valueToReturn = null;
+
+        if (this.last != null) {
+            valueToReturn = this.last.getValue();
+        }
+
+        return valueToReturn;
+    }
+
+    public boolean isEmpty() {
+        return (this.first == null && this.last==null);
+    }
+
     public String parseMylisttoString() {
         StringBuilder sb = new StringBuilder();
         Node<T> temp = this.first;
@@ -231,7 +271,21 @@ public class MyLinkedListImpl<T> implements MyList<T>{
     public Node<T> getlast(){
         return this.last;
     }
-
+    @Override
+    public void set(int position, T value) {
+        if (position < 0 || position >= size()) {
+            throw new IndexOutOfBoundsException("Index out of range");
+        }
+        Node<T> temp = this.first;
+        int currentPosition = 0;
+        while (temp != null && currentPosition != position) {
+            temp = temp.getNext();
+            currentPosition++;
+        }
+        if (temp != null) {
+            temp.setValue(value);
+        }
+    }
     public void addInOrder(T track, Object o) {
         Node<T> temp = this.first;
         Node<T> elementToAdd = new Node<>(track);

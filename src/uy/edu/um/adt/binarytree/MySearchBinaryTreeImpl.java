@@ -190,4 +190,25 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements
             findNodesByDate(node.getRight(), dateKey, result);
         }
     }
+    @Override
+    public MyList<TreeNode<K, V>> findNodesByDateRange(K startDate, K endDate) {
+        MyList<TreeNode<K, V>> result = new MyLinkedListImpl<>();
+        findNodesByDateRange(root, startDate, endDate, result);
+        return result;
+    }
+
+    private void findNodesByDateRange(TreeNode<K, V> node, K startDate, K endDate, MyList<TreeNode<K, V>> result) {
+        if (node == null) {
+            return;
+        }
+        if (startDate.compareTo(node.getKey()) < 0) {
+            findNodesByDateRange(node.getLeft(), startDate, endDate, result);
+        }
+        if (startDate.compareTo(node.getKey()) <= 0 && endDate.compareTo(node.getKey()) >= 0) {
+            result.add(node);
+        }
+        if (endDate.compareTo(node.getKey()) > 0) {
+            findNodesByDateRange(node.getRight(), startDate, endDate, result);
+        }
+    }
 }

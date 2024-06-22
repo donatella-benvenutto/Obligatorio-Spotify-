@@ -1,6 +1,7 @@
 package uy.edu.um.adt.hash;
 
 import uy.edu.um.adt.linkedlist.MyList;
+import uy.edu.um.adt.hash.MyHashImpl;
 
 public interface MyHash<K extends Comparable<K>, V> {
 
@@ -16,6 +17,8 @@ public interface MyHash<K extends Comparable<K>, V> {
 
     int getCapacity();
     public MyHashImpl.Entry<K, V>[] getTable();
+
+
 
     //public K getKey();
     //public V getValue();

@@ -2,8 +2,6 @@ package uy.edu.um.adt.hash;
 
 
 import org.apache.commons.math3.primes.Primes;
-import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
-import uy.edu.um.adt.linkedlist.Node;
 
 public class MyHashImpl<K extends Comparable<K>, V> implements
         MyHash<K, V> {
@@ -75,6 +73,7 @@ public class MyHashImpl<K extends Comparable<K>, V> implements
         }
         return null;
     }
+
 
     private int findIndex(K key) {
         int hash = key.hashCode() % capacity;
@@ -165,4 +164,5 @@ public class MyHashImpl<K extends Comparable<K>, V> implements
         }
         return keys;
     }*/
+
 }

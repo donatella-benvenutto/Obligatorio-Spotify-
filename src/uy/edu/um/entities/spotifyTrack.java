@@ -117,6 +117,7 @@ public class spotifyTrack implements Comparable<spotifyTrack> {
         this.tempo = tempo;
         this.timeSignature = timeSignature;
         this.artistList = new MyLinkedListImpl<>();
+        splitArtists(artists);
     }
 
     public MyList<Artists> getArtistList() {
@@ -333,6 +334,7 @@ public class spotifyTrack implements Comparable<spotifyTrack> {
 
     private void splitArtists(String artists) {
         if (artists != null && !artists.isEmpty()) {
+            //artistList.clear(); // Limpiar la lista antes de volver a llenarla?????
             artistList = new MyLinkedListImpl<>();
             if (artists.contains("&")){
                 String[] artistArray = artists.split("&");

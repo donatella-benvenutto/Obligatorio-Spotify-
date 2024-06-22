@@ -27,4 +27,5 @@ public interface MySearchBinaryTree<K extends Comparable<K>, V> {
 	TreeNode<K, V> getleftofnode(TreeNode<K, V> node);
 	TreeNode<K, V> findNode(K key);
 	MyList<TreeNode<K, V>> findNodesByDate(K dateKey);
+	MyList<TreeNode<K, V>> findNodesByDateRange(K startDate, K endDate);
 }
