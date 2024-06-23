@@ -7,7 +7,7 @@ import uy.edu.um.entities.spotifyTrack;
 
 public class CountArtistInTop50ByDate {
 
-    public int countArtistInTop50(String artistName, String snapshotDate, MySearchBinaryTree<Integer, spotifyTrack> tree) {
+    public static int countArtistInTop50(String artistName, String snapshotDate, MySearchBinaryTree<Integer, spotifyTrack> tree) {
         int count = 0;
 
         MyList<TreeNode<Integer, spotifyTrack>> nodesOnDate = tree.findNodesByDate(datetoint(snapshotDate));

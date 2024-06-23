@@ -16,9 +16,9 @@ public class CountSongsByTempoRangeAndDateRangeTest {
     public void testCountSongsByTempoRangeAndDateRange() {
         MySearchBinaryTree<Integer, spotifyTrack> tree = new MySearchBinaryTreeImpl<>();
         CountSongsByTempoRangeAndDateRange counter = new CountSongsByTempoRangeAndDateRange();
-        tree.add(20220101, new spotifyTrack("1", "Song1", "Artist1 & Artist2", 1, 0, 0, "US", "2022-01-01", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
-        tree.add(20220102, new spotifyTrack("2", "Song2", "Artist2 & Artist3", 2, 0, 0, "US", "2022-01-02", 80, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 130.0, 4));
-        tree.add(20220103, new spotifyTrack("3", "Song3", "Artist1 & Artist3", 3, 0, 0, "US", "2022-01-03", 70, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 140.0, 4));
+        tree.add(20220101, new spotifyTrack("1", "Song1", "Artist1 , Artist2", 1, 0, 0, "US", "2022-01-01", 90, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 120.0, 4));
+        tree.add(20220102, new spotifyTrack("2", "Song2", "Artist2 , Artist3", 2, 0, 0, "US", "2022-01-02", 80, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 130.0, 4));
+        tree.add(20220103, new spotifyTrack("3", "Song3", "Artist1 , Artist3", 3, 0, 0, "US", "2022-01-03", 70, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 140.0, 4));
         tree.add(20220104, new spotifyTrack("4", "Song4", "Artist4", 4, 0, 0, "US", "2022-01-04", 60, false, 200000, "Album1", "2023-01-01", 0.8, 0.7, 5, -5.0, 1, 0.1, 0.2, 0.0, 0.3, 0.5, 150.0, 4));
 
         int count = counter.countSongsByTempo(120.0, 140.0, "2022-01-01", "2022-01-31", tree);

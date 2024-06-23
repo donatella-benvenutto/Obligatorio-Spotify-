@@ -336,8 +336,8 @@ public class spotifyTrack implements Comparable<spotifyTrack> {
         if (artists != null && !artists.isEmpty()) {
             //artistList.clear(); // Limpiar la lista antes de volver a llenarla?????
             artistList = new MyLinkedListImpl<>();
-            if (artists.contains("&")){
-                String[] artistArray = artists.split("&");
+            if (artists.contains(",")){
+                String[] artistArray = artists.split(",");
                 for (String artistName : artistArray) {
                     artistList.add(new Artists(artistName.trim()));
                     //System.out.println(artistName.trim().toString());
@@ -351,11 +351,14 @@ public class spotifyTrack implements Comparable<spotifyTrack> {
         }
     }
     public static int datetoint(String value) {
-        String[] parts = value.split("-");
-        String year = parts[0];
-        String month = parts[1];
-        String day = parts[2];
-        return Integer.parseInt(year.concat(month).concat(day));
+        if (value != null) {
+            String[] parts = value.split("-");
+            String year = parts[0];
+            String month = parts[1];
+            String day = parts[2];
+            return Integer.parseInt(year.concat(month).concat(day));
+        }
+        return 0;
     }
 
 

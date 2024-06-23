@@ -7,7 +7,7 @@ import uy.edu.um.entities.spotifyTrack;
 
 public class CountSongsByTempoRangeAndDateRange {
 
-    public int countSongsByTempo(double minTempo, double maxTempo, String startDateStr, String endDateStr, MySearchBinaryTree<Integer, spotifyTrack> tree) {
+    public static int countSongsByTempo(double minTempo, double maxTempo, String startDateStr, String endDateStr, MySearchBinaryTree<Integer, spotifyTrack> tree) {
         int startDate = datetoint(startDateStr);
         int endDate = datetoint(endDateStr);
         int count = 0;

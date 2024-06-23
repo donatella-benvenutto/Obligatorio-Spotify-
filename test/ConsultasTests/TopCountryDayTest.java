@@ -88,6 +88,7 @@ public class TopCountryDayTest {
 
         Assert.assertNotNull(result);
         Assert.assertEquals(2, result.size());
+        System.out.println(result);
         Assert.assertTrue(result.get(0).contains("Song2"));
         Assert.assertTrue(result.get(1).contains("Artist1"));
     }

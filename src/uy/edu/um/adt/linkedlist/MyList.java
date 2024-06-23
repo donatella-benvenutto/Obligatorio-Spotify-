@@ -22,4 +22,6 @@ public interface MyList<T> {
     void set(int position, T value);
 
     Node<T> getlast();
+
+
 }

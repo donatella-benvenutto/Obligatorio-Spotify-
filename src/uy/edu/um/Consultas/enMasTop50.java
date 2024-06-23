@@ -89,22 +89,7 @@ public class enMasTop50 {
         songs.set(right, temp);
         return i + 1;
     }
-    /*public static void sortSongsByCountDescending(MyList<SongCount> songs) {
-        // Implementación de Selection Sort
-        int n = songs.size();
-        for (int i = 0; i < n - 1; i++) {
-            int maxIdx = i;
-            for (int j = i + 1; j < n; j++) {
-                if (songs.get(j).getCount() > songs.get(maxIdx).getCount()) {
-                    maxIdx = j;
-                }
-            }
-            // Intercambiar elementos
-            SongCount temp = songs.get(maxIdx);
-            songs.set(maxIdx, songs.get(i));
-            songs.set(i, temp);
-        }
-    }*/
+
     private static int datetoint(String value) {
         String[] parts = value.split("-");
         String year = parts[0];
@@ -141,17 +126,7 @@ public class enMasTop50 {
             return top5Tracks;
         }*/
 
-/*    Con la implementación utilizando Quicksort, la complejidad de tiempo del método getTop5Songs sería:
 
-    Convertir la fecha en entero (datetoint): O(1) (constante)
-    Buscar nodos por fecha: O(n) (en el peor caso)
-    Contar apariciones de cada canción usando un hash map: O(n)
-    Convertir el hash map a una lista: O(n)
-    Ordenar la lista utilizando Quicksort: O(n log n)
-    Construir la lista de las 5 mejores canciones: O(1)
-    La complejidad de tiempo dominante es el Quicksort, que tiene una complejidad de O(n log n) en el caso promedio.
+   // getTop5Songs O(n log n)
 
-    Por lo tanto, la complejidad de tiempo final del método getTop5Songs es: O(n log n)
-
-    Esta implementación es más eficiente que la anterior, que tenía una complejidad de O(n^2) debido al uso de Selection Sort.*/
 }

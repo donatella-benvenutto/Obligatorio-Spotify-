@@ -10,6 +10,57 @@ public class bufferReader {
         String fileName = Paths.get(originalCSVFile).getFileName().toString();
         String processedCSVFile = "CSV/processed_" + fileName;
 
+        try (BufferedReader br = new BufferedReader(new FileReader(originalCSVFile));
+             BufferedWriter bw = new BufferedWriter(new FileWriter(processedCSVFile))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                line = line.replaceAll("\"\"", "\"");
+
+                if (line.startsWith("\"") && line.endsWith("\"\"")) {
+                    line = line.substring(1, line.length() - 2);
+                }
+
+                line = line.replaceAll("\"*;$", ";");
+
+                line = line.replace("&&", ",");
+                line = line.replace("\";", "\"");
+
+                line = line.replaceAll("(^|,)\"?(spotify_id)\"?,", "$1\"$2\",");
+                line = line.replaceAll("(^|,)\"?([a-zA-Z0-9]{22})\"?,", "$1\"$2\",");
+
+                if (line.startsWith("\"spotify_id\"")) {
+                    line = line.replace("\"time_signature\"\";", "\"time_signature\"");
+                }
+
+                line = line.replaceAll("\"(\\d+)\"\";$", "\"$1\";;");
+                line = line.replaceAll("\"(\\d+)\";$", "$1;");
+                line = line.replaceAll("\"(\\d+)$", "$1\"");
+                line = line.replaceAll("(\\d+)\"$", "\"$1\"");
+
+
+                line = line.replaceAll(";;$", "");
+
+                bw.write(line);
+                bw.newLine();
+            }
+        }
+
+        return processedCSVFile;
+    }
+    public static void main(String[] args) {
+        try {
+            String processedFile = preprocessCSV( "CSV/universal_top_spotify_songs.csv");
+            System.out.println("Processed file saved as: " + processedFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*public static String preprocessCSV(String originalCSVFile) throws IOException {
+        String fileName = Paths.get(originalCSVFile).getFileName().toString();
+        String processedCSVFile = "CSV/processed_" + fileName;
+
         Pattern pattern = Pattern.compile("\"([^\"]*)\"");
 
         try (BufferedReader br = new BufferedReader(new FileReader(originalCSVFile));
@@ -105,5 +156,5 @@ public class bufferReader {
         }
 
         return processedCSVFile;
-    }
+    }*/
 }

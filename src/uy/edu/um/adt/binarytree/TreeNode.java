@@ -1,12 +1,13 @@
 
 package uy.edu.um.adt.binarytree;
 
+import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
 
 public class TreeNode<K extends Comparable<K>, V> {
 
 	private K key;
-	
+
 	private V value;
 
 	private TreeNode<K, V> left;
@@ -20,9 +21,9 @@ public class TreeNode<K extends Comparable<K>, V> {
 		this.right = null;
 	}
 
-	public void add(K key, V value) {		
+	public void add(K key, V value) {
 		TreeNode<K, V> elementToAdd = new TreeNode<>(key, value);
-		
+
 		if (key.compareTo(this.key) > 0) {
 
 			if (right == null) {
@@ -51,7 +52,7 @@ public class TreeNode<K extends Comparable<K>, V> {
 	}
 
 	public TreeNode<K, V> remove(K key) {
-        TreeNode<K, V> elementToReturn = this;
+		TreeNode<K, V> elementToReturn = this;
 
 		if (key.compareTo(this.key) > 0) {
 
@@ -73,7 +74,7 @@ public class TreeNode<K extends Comparable<K>, V> {
 			// Encontre el elemento a eliminar
 
 			TreeNode<K, V> min = right.findMin();
-			
+
 			this.key = min.getKey();
 			this.value = min.getValue();
 
@@ -83,11 +84,11 @@ public class TreeNode<K extends Comparable<K>, V> {
 
 			if (left != null) {
 
-                elementToReturn = left;
+				elementToReturn = left;
 
 			} else {
 
-                elementToReturn = right;
+				elementToReturn = right;
 
 			}
 
@@ -115,7 +116,7 @@ public class TreeNode<K extends Comparable<K>, V> {
 	public V getValue() {
 		return value;
 	}
-	
+
 	public K getKey() {
 		return key;
 	}
@@ -141,7 +142,7 @@ public class TreeNode<K extends Comparable<K>, V> {
 	}
 
 	public TreeNode<K, V> findMin() {
-		 TreeNode<K, V> oReturn = this;
+		TreeNode<K, V> oReturn = this;
 
 		if (left != null) {
 
